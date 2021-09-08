@@ -1,0 +1,867 @@
+{
+	"info": {
+		"_postman_id": "f1ead87f-ace6-4edb-a9af-e22c0b153293",
+		"name": "Etcd请求Api",
+		"description": "学习熟悉etcd restful　接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户和权限",
+			"item": [
+				{
+					"name": "获取所有授权用户",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/users",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取指定用户信息",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/users/u1",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"users",
+								"u1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加用户",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\":\"u2\",\n\t\"password\":\"123456\",\n\t\"roles\":[\"123\"]\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/users/u2",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"users",
+								"u2"
+							]
+						},
+						"description": "添加用户并绑定指定权限"
+					},
+					"response": []
+				},
+				{
+					"name": "删除指定用户",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/users/u2",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"users",
+								"u2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "为指定用户添加权限",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\":\"u2\",\n\t\"grant\":[\"123\"]\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/users/u2",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"users",
+								"u2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "为指定用户删除权限",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\":\"u2\",\n\t\"revoke\":[\"123\"]\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/users/u2",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"users",
+								"u2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取所有权限",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/roles",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取指定权限",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/roles/root",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"roles",
+								"root"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加权限",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"role\":\"cussoul\",\n\t\"permissions\":{\n\t\t\"kv\":{\n\t\t\t\"read\":[\"/cu1/*\"]\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/roles/cussoul",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"roles",
+								"cussoul"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除指定权限",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"role\":\"cussoul\",\n\t\"permissions\":{\n\t\t\"kv\":{\n\t\t\t\"read\":[\"/cu1/*\"]\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/roles/cussoul",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"roles",
+								"cussoul"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置权限的作用域",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"role\":\"cussoul\",\n\t\"grant\":{\n\t\t\"kv\":{\n\t\t\t\"read\":[\"/cs/*\"]\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/roles/cussoul",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"roles",
+								"cussoul"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除权限作用域",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"role\":\"cussoul\",\n\t\"revoke\":{\n\t\t\"kv\":{\n\t\t\t\"read\":[\"/cs/*\"]\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/roles/cussoul",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"roles",
+								"cussoul"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "开启授权验证",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic cm9vdDoxMjM0NTY="
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/enable",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"enable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "关闭授权验证",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic cm9vdDoxMjM0NTY="
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{ETCD_HOST}}/v2/auth/enable",
+							"host": [
+								"{{ETCD_HOST}}"
+							],
+							"path": [
+								"v2",
+								"auth",
+								"enable"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "用户授权相关\n"
+		},
+		{
+			"name": "查看节点版本信息",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/version",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看leader",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/stats/leader",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"stats",
+						"leader"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "节点自身信息",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/stats/self",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"stats",
+						"self"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看集群运行状态",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/stats/store",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"stats",
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "列出所有集群成员",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/members",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看所有的键值",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看某个键的键值",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cm9vdDoxMjM0NTY="
+					}
+				],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/service-manage/service-router-cach57b31953181445f26918e6ae96ae8406",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"service-manage",
+						"service-router-cach57b31953181445f26918e6ae96ae8406"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看某个ttl键的键值",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/seqkey",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"seqkey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建目录",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "dir",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/dir1",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"dir1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建键值",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/hello2",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"hello2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建带ttl的键值",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "ttl_value",
+							"type": "text"
+						},
+						{
+							"key": "ttl",
+							"value": "60",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/ttlkey",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"ttlkey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建有序键值",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "ttl_value1",
+							"type": "text"
+						},
+						{
+							"key": "ttl",
+							"value": "60",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/seqkey",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"seqkey"
+					]
+				},
+				"description": "使用post 方法创建的key 就是有序的键值～"
+			},
+			"response": []
+		},
+		{
+			"name": "删除指定的键非目录",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/hello2",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"hello2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "删除指定的目录",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "ttl_value1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "ttl",
+							"value": "60",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "dir",
+							"value": "true",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/dir1?dir=true",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"dir1"
+					],
+					"query": [
+						{
+							"key": "dir",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建一个隐藏键值",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "value",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/_message",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"_message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "监听某个key直到超时",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ETCD_HOST}}/v2/keys/foo?wait=true",
+					"host": [
+						"{{ETCD_HOST}}"
+					],
+					"path": [
+						"v2",
+						"keys",
+						"foo"
+					],
+					"query": [
+						{
+							"key": "wait",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
